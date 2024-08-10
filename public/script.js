@@ -32,13 +32,10 @@ document.getElementById('csv-form').addEventListener('submit', (event) => {
       Products_number
     }),
   })
-    .then((response) => {
-      if (response.ok) {
-        alert('Data saved to CSV file');
-      } else {
-        alert('Error saving data to CSV file');
-      }
-    })
+  .then(data => {
+    // Reset the form fields after successful data addition
+    document.getElementById('csv-form').reset();
+  })
     .catch((error) => {
       console.error('Error:', error);
       alert('An error occurred while saving the data');
