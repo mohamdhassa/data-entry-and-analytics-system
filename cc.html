@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,4 +24,31 @@
         setInterval(updateGraph, 5000); // Update the graph every 5 seconds
     </script>
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Refreshing Graph</title>
+    <script>
+        function refreshPage() {
+            window.location.reload();
+        }
+
+        setInterval(refreshPage, 5000); // Refresh the page every 5 seconds
+    </script>
+</head>
+<body>
+    <h1>Refreshing Graph</h1>
+    <img id="graph" src="output.png" alt="Graph">
+
+    <script>
+        function updateGraph() {
+            var img = document.getElementById("graph");
+            img.src = "output.png?t=" + new Date().getTime();
+        }
+
+        setInterval(updateGraph, 5000); // Update the graph every 5 seconds
+    </script>
+</body>
+>>>>>>> e1ae0d880aca423fa3b11c9e89834d1a12353ace
 </html>
