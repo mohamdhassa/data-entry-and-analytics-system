@@ -60,9 +60,9 @@ app.post('/csv-data', (req, res) => {
 });
 
 function convertToCSV(data) {
-  const csvRows = [];
-  const headers = Object.keys(data[0]); 
-  csvRows.push(headers.join(',')); 
+const csvRows = [];
+const headers = Object.keys(data[0]); 
+csvRows.push(headers.join(',')); 
 
   for (const row of data) {
     const values = headers.map((header) => row[header]); 
