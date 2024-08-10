@@ -13,7 +13,8 @@ app.use(express.json());
 
 // Route to handle CSV data operations
 app.post('/csv-data', (req, res) => {
-  const { firstName, lastName, price, sale } = req.body;
+  const { Credit_score, Country, Gender,
+    Age, Tenure, Balance, Products_number, Credit_card, Active_member, Estimated_salary, Churn } = req.body;
 
   // Load data from the CSV file
   let data = [];
@@ -23,14 +24,24 @@ app.post('/csv-data', (req, res) => {
       .pipe(csv())
       .on('data', (row) => {
         data.push(row);
-        nextId = Math.max(nextId, parseInt(row.ID) + 1);
+        nextId = Math.max(nextId, parseInt(row.customer_id) + 1); 
       })
       .on('end', () => {
-        // Get the current timestamp
-        const timestamp = new Date().toLocaleString();
-
-        // Add the new row to the data with timestamp
-        data.push({ ID: nextId, 'First Name': firstName, 'Last Name': lastName, Price: price, 'Sale': sale, 'Input Time': timestamp });
+        // Add the new row to the data
+        data.push({ 
+          'customer_id': nextId, 
+          'credit_score': Credit_score, 
+          'country': Country,
+          'gender': Gender, 
+          'age': Age, 
+          'tenure': Tenure, 
+          'balance': Balance, 
+          'credit_card': Credit_card,
+          'active_member': Active_member, 
+          'estimated_salary': Estimated_salary, 
+          'products_number': Products_number, 
+          'churn': Churn 
+        }); 
 
         // Write the updated data to the CSV file
         fs.writeFile('output.csv', convertToCSV(data), (err) => {
@@ -50,15 +61,15 @@ app.post('/csv-data', (req, res) => {
 
 function convertToCSV(data) {
   const csvRows = [];
-  const headers = Object.keys(data[0]); // Get headers from the first row
-  csvRows.push(headers.join(',')); // Add headers to the CSV
+  const headers = Object.keys(data[0]); 
+  csvRows.push(headers.join(',')); 
 
   for (const row of data) {
-    const values = headers.map((header) => row[header]); // Get values for each header
-    csvRows.push(values.join(',')); // Add values to the CSV
+    const values = headers.map((header) => row[header]); 
+    csvRows.push(values.join(',')); 
   }
 
-  return csvRows.join('\n'); // Join rows with newline characters
+  return csvRows.join('\n'); 
 }
 
 app.listen(port, () => {
