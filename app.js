@@ -8,6 +8,7 @@ const port = 3000;
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
+
 // Parse JSON request bodies
 app.use(express.json());
 
@@ -75,3 +76,5 @@ csvRows.push(headers.join(','));
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
