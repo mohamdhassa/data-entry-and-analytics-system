@@ -42,5 +42,3 @@ document.getElementById('csv-form').addEventListener('submit', (event) => {
       alert('An error occurred while saving the data');
     });
 });
-
-
